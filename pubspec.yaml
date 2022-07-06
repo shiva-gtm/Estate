@@ -21,15 +21,13 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-<<<<<<< HEAD
   #firebase dependencies
   firebase_core: ^1.19.1
   firebase_auth: ^3.4.1
   cloud_firestore: ^3.2.1
-=======
+
   google_fonts: ^3.0.1
   font_awesome_flutter: ^10.1.0
->>>>>>> df6f68fbda6cecd051bc7362b163bc7eaae753d4
 
 dev_dependencies:
   flutter_test:
