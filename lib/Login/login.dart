@@ -51,10 +51,10 @@ class LoginButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
-        label: Text("login as guest"),
+        label: const Text("Login as guest"),
         icon: Icon(
           icon,
-          color: Color.fromARGB(255, 255, 47, 47),
+          color: const Color.fromARGB(255, 255, 47, 47),
           size: 20,
         ),
         style: TextButton.styleFrom(
