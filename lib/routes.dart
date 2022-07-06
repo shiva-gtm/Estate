@@ -8,8 +8,8 @@ import 'package:estate/Signup/signup.dart';
 import 'package:estate/Welcome/welcome.dart';
 
 var appRoutes = {
-  '/': (context) => const HomeScreen(),
-  '/welcome': (context) => const WelcomeScreen(),
+  '/': (context) => const WelcomeScreen(),
+  '/home': (context) => const HomeScreen(),
   '/signup': (context) => const SignupScreen(),
   '/login': (context) => const LoginScreen(),
   '/mapView': (context) => const MapScreen(),
