@@ -1,3 +1,4 @@
+import 'package:estate/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:estate/Login/login.dart';
 import 'package:estate/services/Auth.dart';
@@ -17,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Text("error"),
           );
         } else if (snapshot.hasData) {
-          return const WelcomeScreen();
+          return const HomeScreen();
         } else {
           return const LoginScreen();
         }
