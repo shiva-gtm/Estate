@@ -5,6 +5,7 @@ import 'package:estate/Login/login.dart';
 import 'package:estate/EstateMapView/map.dart';
 import 'package:estate/Profile/profile.dart';
 import 'package:estate/Signup/signup.dart';
+import 'package:estate/Verify/verify.dart';
 import 'package:estate/Welcome/welcome.dart';
 
 var appRoutes = {
@@ -16,4 +17,5 @@ var appRoutes = {
   '/list': (context) => const ListScreen(),
   '/about': (context) => const AboutScreen(),
   '/profile': (context) => const ProfileScreen(),
+  '/verify': (context) => const VerifyScreen(),
 };
