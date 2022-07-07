@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 var appTheme = ThemeData(
   fontFamily: GoogleFonts.nunito().fontFamily,
+  primarySwatch: Colors.teal,
   bottomAppBarTheme: const BottomAppBarTheme(
     color: Colors.black87,
   ),
