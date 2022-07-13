@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -94,7 +95,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       .createUserWithEmailAndPassword(
                           email: _email, password: _password)
                       .then((_) {
-                    Navigator.pushNamed(context, '/login');
+                    Navigator.pushNamed(context, '/verify');
                   });
                 }),
                 child: const Text("Sign up"),
@@ -102,9 +103,12 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(
                 height: 25,
               ),
-              ElevatedButton(
+              ElevatedButton.icon(
                 onPressed: (() {}),
-                child: const Text("Sign up With Google"),
+                icon: const FaIcon(
+                  FontAwesomeIcons.google,
+                ),
+                label: const Text("Sign up With Google"),
               ),
               const SizedBox(
                 height: 50,
