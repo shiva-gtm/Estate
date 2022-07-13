@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:estate/services/Auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late String _email, _password;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +21,78 @@ class LoginScreen extends StatelessWidget {
         padding: const EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const FlutterLogo(
-              size: 150,
+            const SizedBox(
+              height: 100,
+            ),
+            const Center(
+              child: Text(
+                'Login Your Account',
+                style: TextStyle(fontSize: 25),
+              ),
+            ),
+            const SizedBox(
+              height: 80,
+            ),
+            TextFormField(
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.email),
+                contentPadding: const EdgeInsets.all(10),
+                hintText: 'Enter Your Email',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _email = value.trim();
+                });
+              },
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            TextFormField(
+              obscureText: true,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                prefixIcon: const Icon(Icons.lock),
+                contentPadding: const EdgeInsets.all(10),
+                hintText: 'Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  _password = value.trim();
+                });
+              },
+            ),
+            const SizedBox(
+              height: 50,
+            ),
+            ElevatedButton(
+              onPressed: (() {
+                auth
+                    .signInWithEmailAndPassword(
+                        email: _email, password: _password)
+                    .then((_) {
+                  Navigator.pushNamed(context, '/home');
+                });
+              }),
+              style: ElevatedButton.styleFrom(
+                fixedSize: const Size(300, 50),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(50),
+                ),
+              ),
+              child: const Text('Login'),
+            ),
+            const SizedBox(
+              height: 40,
             ),
             Flexible(
               child: LoginButton(
@@ -24,6 +101,9 @@ class LoginScreen extends StatelessWidget {
                 loginMethod: AuthService().anonLogin,
                 color: Colors.deepPurple,
               ),
+            ),
+            const SizedBox(
+              height: 60,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -69,9 +149,11 @@ class LoginButton extends StatelessWidget {
           color: const Color.fromARGB(255, 255, 47, 47),
           size: 20,
         ),
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.all(24),
-          backgroundColor: color,
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(300, 50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
         ),
         onPressed: () => loginMethod(),
         label: Text(text, textAlign: TextAlign.center),

@@ -50,7 +50,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     if (user.emailVerified) {
       timer.cancel();
       // ignore: use_build_context_synchronously
-      Navigator.pushNamed(context, '/home');
+      Navigator.pushNamed(context, '/login');
     }
   }
 }
