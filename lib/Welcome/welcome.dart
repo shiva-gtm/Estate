@@ -18,7 +18,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Text("error"),
           );
         } else if (snapshot.hasData) {
-          return const HomeScreen();
+          return HomeScreen();
         } else {
           return const LoginScreen();
         }

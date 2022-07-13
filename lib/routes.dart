@@ -10,7 +10,7 @@ import 'package:estate/favourite/favourite.dart';
 
 var appRoutes = {
   '/': (context) => const WelcomeScreen(),
-  '/home': (context) => const HomeScreen(),
+  '/home': (context) => HomeScreen(),
   '/signup': (context) => const SignupScreen(),
   '/login': (context) => const LoginScreen(),
   '/mapView': (context) => const MapScreen(),

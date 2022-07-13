@@ -1,4 +1,3 @@
-import 'package:estate/Shared/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 class ListScreen extends StatelessWidget {
@@ -6,8 +5,10 @@ class ListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavBar(),
+    return Container(
+      child: Center(
+        child: Text("List"),
+      ),
     );
   }
 }
