@@ -51,7 +51,6 @@ class LoginButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
-        label: const Text("Login as guest"),
         icon: Icon(
           icon,
           color: const Color.fromARGB(255, 255, 47, 47),
@@ -62,6 +61,7 @@ class LoginButton extends StatelessWidget {
           backgroundColor: color,
         ),
         onPressed: () => loginMethod(),
+        label: Text(text, textAlign: TextAlign.center),
       ),
     );
   }
