@@ -24,7 +24,20 @@ class LoginScreen extends StatelessWidget {
                 loginMethod: AuthService().anonLogin,
                 color: Colors.deepPurple,
               ),
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text("Create an account?"),
+                TextButton(
+                    onPressed: (() {
+                      Navigator.pushNamed(context, '/signup');
+                    }),
+                    child: const Text(
+                      "SignUp",
+                    ))
+              ],
+            ),
           ],
         ),
       ),
