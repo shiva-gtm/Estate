@@ -1,9 +1,11 @@
+import 'package:estate/loading.dart';
 import 'package:estate/routes.dart';
 import 'package:estate/theme.dart';
 import 'package:flutter/material.dart';
 
 // Import the firebase_core plugin
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +49,7 @@ class _AppState extends State<App> {
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
-        return Text('loading', textDirection: TextDirection.ltr);
+        return const LoadingScreen();
       },
     );
   }
