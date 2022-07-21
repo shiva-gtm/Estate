@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:estate/services/Auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
   // final _formKey = GlobalKey<FormState>();
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late String _email, _password;
+  final auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -67,9 +76,11 @@ class LoginButton extends StatelessWidget {
           color: const Color.fromARGB(255, 255, 47, 47),
           size: 20,
         ),
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.all(24),
-          backgroundColor: color,
+        style: ElevatedButton.styleFrom(
+          fixedSize: const Size(300, 50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
         ),
         onPressed: () => loginMethod(),
       ),
