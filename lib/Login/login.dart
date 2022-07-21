@@ -4,18 +4,22 @@ import 'package:estate/services/Auth.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
+  // final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(30),
+        padding: const EdgeInsets.all(20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const FlutterLogo(
               size: 150,
+            ),
+            const SizedBox(
+              height: 20,
             ),
             Flexible(
               child: LoginButton(
@@ -24,7 +28,13 @@ class LoginScreen extends StatelessWidget {
                 loginMethod: AuthService().anonLogin,
                 color: Colors.deepPurple,
               ),
-            )
+            ),
+            LoginButton(
+              text: "Sign in with Google",
+              icon: FontAwesomeIcons.google,
+              color: Colors.blue,
+              loginMethod: AuthService().googleLogin,
+            ),
           ],
         ),
       ),
@@ -51,7 +61,7 @@ class LoginButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
-        label: const Text("Login as guest"),
+        label: Text(text),
         icon: Icon(
           icon,
           color: const Color.fromARGB(255, 255, 47, 47),

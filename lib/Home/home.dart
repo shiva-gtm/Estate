@@ -1,3 +1,4 @@
+import 'package:estate/services/Auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -5,6 +6,18 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Home"),
+      ),
+      body: ElevatedButton(
+        child: Text("signout"),
+        onPressed: () async {
+          await AuthService().signOut;
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/login', (route) => false);
+        },
+      ),
+    );
   }
 }
