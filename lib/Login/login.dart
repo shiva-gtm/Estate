@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+  // final _formKey = GlobalKey<FormState>();
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -17,127 +18,33 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const SizedBox(
-                height: 100,
+      body: Container(
+        padding: const EdgeInsets.all(20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const FlutterLogo(
+              size: 150,
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Flexible(
+              child: LoginButton(
+                icon: FontAwesomeIcons.userNinja,
+                text: "Continue as Guest",
+                loginMethod: AuthService().anonLogin,
+                color: Colors.deepPurple,
               ),
-              const Center(
-                child: Text(
-                  'Login Your Account',
-                  style: TextStyle(fontSize: 25),
-                ),
-              ),
-              const SizedBox(
-                height: 80,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Enter Your Email',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _email = value.trim();
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              TextFormField(
-                obscureText: true,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock),
-                  contentPadding: const EdgeInsets.all(10),
-                  hintText: 'Password',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    _password = value.trim();
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-              ElevatedButton(
-                onPressed: (() {
-                  auth
-                      .signInWithEmailAndPassword(
-                          email: _email, password: _password)
-                      .then((_) {
-                    Navigator.pushNamed(context, '/home');
-                  });
-                }),
-                style: ElevatedButton.styleFrom(
-                  fixedSize: const Size(300, 50),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                ),
-                child: const Text('Login'),
-              ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
-              // ElevatedButton.icon(
-              //   onPressed: (() {}),
-              //   icon: const FaIcon(
-              //     FontAwesomeIcons.google,
-              //   ),
-              //   style: ElevatedButton.styleFrom(
-              //     fixedSize: const Size(300, 50),
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(50),
-              //     ),
-              //   ),
-              //   label: const Text("Login With Google"),
-              // ),
-              const SizedBox(
-                height: 30,
-              ),
-              SizedBox(
-                child: LoginButton(
-                  icon: FontAwesomeIcons.userNinja,
-                  text: "Continue as Guest",
-                  loginMethod: AuthService().anonLogin,
-                  color: Colors.deepPurple,
-                ),
-              ),
-
-              const SizedBox(
-                height: 100,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Create an account?"),
-                  TextButton(
-                      onPressed: (() {
-                        Navigator.pushNamed(context, '/signup');
-                      }),
-                      child: const Text(
-                        "SignUp",
-                      ))
-                ],
-              ),
-            ],
-          ),
+            ),
+            LoginButton(
+              text: "Sign in with Google",
+              icon: FontAwesomeIcons.google,
+              color: Colors.blue,
+              loginMethod: AuthService().googleLogin,
+            ),
+          ],
         ),
       ),
     );
@@ -163,6 +70,7 @@ class LoginButton extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       child: ElevatedButton.icon(
+        label: Text(text),
         icon: Icon(
           icon,
           color: const Color.fromARGB(255, 255, 47, 47),
@@ -175,7 +83,6 @@ class LoginButton extends StatelessWidget {
           ),
         ),
         onPressed: () => loginMethod(),
-        label: Text(text, textAlign: TextAlign.center),
       ),
     );
   }
