@@ -14,10 +14,10 @@ class _HomeScreenState extends State<HomeScreen> {
   final indexs = GlobalKey<_BottomNavBarState>();
 
   final screen = [
-    MapScreen(),
-    ListScreen(),
-    FavouriteScreen(),
-    ProfileScreen()
+    const MapScreen(),
+    const ListScreen(),
+    const FavouriteScreen(),
+    const ProfileScreen()
   ];
   @override
   Widget build(BuildContext context) {

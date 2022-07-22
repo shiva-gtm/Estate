@@ -5,10 +5,8 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Center(
-        child: Text("Favourite Screen"),
-      ),
+    return const Center(
+      child: Text("Favourite Screen"),
     );
   }
 }

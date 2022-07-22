@@ -4,7 +4,7 @@ import 'package:estate/loading.dart';
 import 'package:estate/test.dart';
 import 'package:flutter/material.dart';
 import 'package:estate/Login/login.dart';
-import 'package:estate/services/Auth.dart';
+import 'package:estate/services/auth.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});

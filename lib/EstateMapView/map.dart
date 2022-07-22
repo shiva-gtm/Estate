@@ -1,6 +1,6 @@
 import 'package:estate/services/location_service.dart';
 import 'package:flutter/material.dart';
-import 'package:estate/services/Auth.dart';
+import 'package:estate/services/auth.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -14,17 +14,69 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   final TextEditingController _searchController = TextEditingController();
 
-  static final Marker _mapMarker = Marker(
-    markerId: const MarkerId('house_123'),
-    infoWindow: const InfoWindow(
-      title: "House-123",
-      // onTap: () {
-      //   Navigator.pushNamed(context, './list');
-      // }
-    ),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
-    position: const LatLng(27.666914966167347, 85.3389646474501),
-  );
+  Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  void initMarkers(specify, specifyId) async {
+    var markerIdVal = specifyId;
+    final MarkerId markerId = MarkerId(markerIdVal);
+
+    final Marker marker = Marker(
+      markerId: markerId,
+      position: LatLng(
+        double.parse(specify['location']['latitude']),
+        double.parse(specify['location']['longitude']),
+      ),
+      icon: BitmapDescriptor.defaultMarker,
+      infoWindow: InfoWindow(
+        title: specify['location']['address'],
+      ),
+    );
+
+    setState(() {
+      markers[markerId] = marker;
+    });
+  }
+
+  getMarkerData() async {
+    FirebaseFirestore.instance.collection('Houses').get().then(
+      (houseData) {
+        if (houseData.docs.isNotEmpty) {
+          for (int i = 0; i < houseData.docs.length; i++) {
+            // ignore: avoid_print
+            initMarkers(houseData.docs[i].data(), houseData.docs[i].id);
+          }
+        }
+      },
+    );
+
+    FirebaseFirestore.instance.collection('lands').get().then(
+      (houseData) {
+        if (houseData.docs.isNotEmpty) {
+          for (int i = 0; i < houseData.docs.length; i++) {
+            // ignore: avoid_print
+            initMarkers(houseData.docs[i].data(), houseData.docs[i].id);
+          }
+        }
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    getMarkerData();
+    super.initState();
+  }
+
+  // Set<Marker> getMarker() {
+  //   return <Marker>[
+  //     Marker(
+  //       markerId: MarkerId('House 001'),
+  //       position: LatLng(27.666914966167347, 85.3389646474501),
+  //       icon: BitmapDescriptor.defaultMarker,
+  //       infoWindow: InfoWindow(title: 'House 001'),
+  //     )
+  //   ].toSet();
+  // }
 
   final CameraPosition _initialPositioned = const CameraPosition(
     target: LatLng(27.666914966167347, 85.3389646474501),
@@ -68,28 +120,10 @@ class _MapScreenState extends State<MapScreen> {
           Expanded(
             child: GoogleMap(
               initialCameraPosition: _initialPositioned,
-              markers: {_mapMarker},
+              markers: Set<Marker>.of(markers.values),
               mapType: MapType.normal,
             ),
           ),
-          StreamBuilder(
-              stream:
-                  FirebaseFirestore.instance.collection('lands/').snapshots(),
-              builder: (context, streamSnapshot) {
-                if (streamSnapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-                final documents = streamSnapshot.data?.docs;
-                return Text(documents![0]['title']
-                    // itemCount: documents?.length,
-                    // itemBuilder: ((context, index) => Container(
-                    //       padding: const EdgeInsets.all(8),
-                    //       child: Text(documents![index]['location']),
-                    //     )),
-                    );
-              })
         ],
       ),
     );
