@@ -13,8 +13,21 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
   final TextEditingController _searchController = TextEditingController();
+  late BitmapDescriptor mapMarker;
 
   Map<MarkerId, Marker> markers = <MarkerId, Marker>{};
+
+  @override
+  void initState() {
+    super.initState();
+    setCustomMarker();
+    getMarkerData();
+  }
+
+  void setCustomMarker() async {
+    mapMarker = await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(), 'assets/marker.png');
+  }
 
   void initMarkers(specify, specifyId) async {
     var markerIdVal = specifyId;
@@ -26,9 +39,10 @@ class _MapScreenState extends State<MapScreen> {
         double.parse(specify['location']['latitude']),
         double.parse(specify['location']['longitude']),
       ),
-      icon: BitmapDescriptor.defaultMarker,
+      icon: mapMarker,
       infoWindow: InfoWindow(
         title: specify['title'],
+        snippet: specify['location']['address'],
       ),
       onTap: () {},
     );
@@ -60,12 +74,6 @@ class _MapScreenState extends State<MapScreen> {
         }
       },
     );
-  }
-
-  @override
-  void initState() {
-    getMarkerData();
-    super.initState();
   }
 
   // Set<Marker> getMarker() {
