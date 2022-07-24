@@ -11,7 +11,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final indexs = GlobalKey<_BottomNavBarState>();
+  int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
 
   final screen = [
     const MapScreen(),
@@ -21,67 +27,50 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    final currentIndex = indexs.currentState?.currentIndex == null
-        ? 0
-        : indexs.currentState!.currentIndex;
     return Scaffold(
-      body: ListScreen(),
-      bottomNavigationBar: BottomNavBar(key: indexs),
-    );
-  }
-}
-
-class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
-
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
-  int currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: currentIndex,
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(
-            FontAwesomeIcons.mapLocation,
-            size: 25,
+      body: screen[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _currentIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.mapLocation,
+              size: 25,
+            ),
+            label: 'Map View',
           ),
-          label: 'Map View',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            FontAwesomeIcons.list,
-            size: 25,
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.list,
+              size: 25,
+            ),
+            label: 'List View',
           ),
-          label: 'List View',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            FontAwesomeIcons.circleUser,
-            size: 25,
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.circleUser,
+              size: 25,
+            ),
+            label: 'Profile',
           ),
-          label: 'Profile',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            FontAwesomeIcons.heart,
-            size: 25,
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.heart,
+              size: 25,
+            ),
+            label: 'Favourite',
           ),
-          label: 'Favourite',
-        ),
-      ],
-      onTap: (idx) => setState(() => currentIndex = idx),
-      selectedItemColor: Colors.white,
-      unselectedItemColor: Colors.black,
-      showSelectedLabels: false,
-      showUnselectedLabels: false,
-      elevation: 0,
+        ],
+        onTap: (idx) {
+          _onItemTapped(idx);
+        },
+        selectedItemColor: Colors.greenAccent,
+        unselectedItemColor: Colors.white,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        elevation: 0,
+      ),
     );
   }
 }

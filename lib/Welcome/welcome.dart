@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
             child: Text("error"),
           );
         } else if (snapshot.hasData) {
-          return MapScreen();
+          return HomeScreen();
         } else {
           return const LoginScreen();
         }
