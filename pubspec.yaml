@@ -33,6 +33,7 @@ dependencies:
   crypto: ^3.0.2
   google_maps_flutter: ^2.1.8
   http: ^0.13.4
+  carousel_slider: ^4.1.1
 
 dev_dependencies:
   flutter_test:
