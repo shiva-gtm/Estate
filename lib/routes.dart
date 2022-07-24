@@ -1,4 +1,5 @@
 import 'package:estate/About/about.dart';
+import 'package:estate/Detail/detail.dart';
 import 'package:estate/Home/home.dart';
 import 'package:estate/EstateList/list.dart';
 import 'package:estate/Login/login.dart';
@@ -22,4 +23,5 @@ var appRoutes = {
   '/profile': (context) => const ProfileScreen(),
   '/favourite': (context) => const FavouriteScreen(),
   '/verify': (context) => const VerifyScreen(),
+  '/detail': (context) => const DetailScreen(),
 };
