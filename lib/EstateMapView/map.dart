@@ -28,8 +28,9 @@ class _MapScreenState extends State<MapScreen> {
       ),
       icon: BitmapDescriptor.defaultMarker,
       infoWindow: InfoWindow(
-        title: specify['location']['address'],
+        title: specify['title'],
       ),
+      onTap: () {},
     );
 
     setState(() {
@@ -80,7 +81,7 @@ class _MapScreenState extends State<MapScreen> {
 
   final CameraPosition _initialPositioned = const CameraPosition(
     target: LatLng(27.666914966167347, 85.3389646474501),
-    zoom: 15,
+    zoom: 10,
   );
 
   @override

@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ? 0
         : indexs.currentState!.currentIndex;
     return Scaffold(
-      body: screen[currentIndex],
+      body: ListScreen(),
       bottomNavigationBar: BottomNavBar(key: indexs),
     );
   }
