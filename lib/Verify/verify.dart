@@ -2,8 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class VerifyScreen extends StatefulWidget {
   const VerifyScreen({super.key});
@@ -22,7 +20,7 @@ class _VerifyScreenState extends State<VerifyScreen> {
     user = auth.currentUser!;
     user.sendEmailVerification();
 
-    timer = Timer.periodic(Duration(seconds: 5), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       checkEmailVerified();
     });
     super.initState();
@@ -36,11 +34,25 @@ class _VerifyScreenState extends State<VerifyScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-          child: Center(
-              child: Text(
-                  'An email has been sent to ${user.email} please verify'))),
+        child: Center(
+          child: SizedBox(
+            width: 350.0,
+            height: 100.0,
+            child: Card(
+              color: Colors.black12,
+              child: Center(
+                child: Text(
+                  'Email has been sent to your email address. Please verfy!!',
+                  style: TextStyle(color: Colors.white, fontSize: 17),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 

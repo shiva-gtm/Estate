@@ -171,7 +171,7 @@ class Overview extends StatelessWidget {
             ),
             const Icon(
               Icons.car_repair,
-              size: 30,
+              size: 35,
               color: Colors.black45,
             ),
             Column(
